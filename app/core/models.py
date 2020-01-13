@@ -35,3 +35,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Project(models.Model):
+    name = models.CharField(max_length=255)
+    land_owner = models.CharField(max_length=255)
+    date = models.DateTimeField(auto_now_add=True)
+    metric_system = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name

@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+from core import models
+
 
 def sample_user(email='test@testing.com', password='testpass'):
     """Create a sample user"""
@@ -41,3 +43,12 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_project_str(self):
+        """Test project string representation"""
+        project = models.Project.objects.create(
+            name='Test Project',
+            land_owner='Test Owner',
+            metric_system=True)
+
+        self.assertEqual(str(project), project.name)
