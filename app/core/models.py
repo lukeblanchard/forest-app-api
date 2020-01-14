@@ -45,3 +45,14 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Stand(models.Model):
+    project_id = models.ForeignKey('Project', on_delete=models.CASCADE)
+    identification = models.IntegerField()
+    location = models.CharField(max_length=255)
+    origin_year = models.IntegerField()
+    size = models.FloatField()
+
+    def __str__(self):
+        return self.location + '::' + str(self.identification)

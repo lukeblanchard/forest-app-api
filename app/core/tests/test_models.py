@@ -50,5 +50,21 @@ class ModelTests(TestCase):
             name='Test Project',
             land_owner='Test Owner',
             metric_system=True)
-
         self.assertEqual(str(project), project.name)
+
+    def test_stand_str(self):
+        """Test stand string representation"""
+        project = models.Project.objects.create(
+            name='Test Project A',
+            land_owner='Test Owner A',
+            metric_system=True)
+
+        stand = models.Stand.objects.create(
+            project_id=project,
+            identification=3,
+            location='Albemarle County',
+            origin_year=1945,
+            size=54.5
+        )
+        str_rep = stand.location + '::' + str(stand.identification)
+        self.assertEqual(str(stand), str_rep)
