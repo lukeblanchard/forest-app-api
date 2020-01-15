@@ -16,6 +16,7 @@ from forest.serializers import ProjectSerializer
 
 
 PROJECTS_URL = reverse('forest:project-list')
+STAND_URL = reverse('forest:stand-list')
 
 
 def project_stands_url(project_id):
@@ -54,7 +55,7 @@ def sample_stand(project_id, stand_id, **params):
     return Stand.objects.create(**defaults)
 
 
-class PublicProjectsApiTests(TestCase):
+class PublicProjectsApiTest(TestCase):
     """Test publicly available project API"""
 
     def setUp(self):
@@ -114,7 +115,38 @@ class PublicProjectsApiTests(TestCase):
         sample_stand(project, 1)
         sample_stand(project, 2)
 
+#        stands = Stand.objects.all()
+#        serializer = StandSerializer(stands, many=True)
+#        print(serializer.data)
+#
         url = project_stands_url(project.id)
         res = self.client.get(url)
 
         self.assertEqual(len(res.data), 2)
+
+
+class PublicStandsApiTest(TestCase):
+    """Test publicly available stands API"""
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_create_project_successful(self):
+        """Test creating a new stand"""
+        project = sample_project()
+        payload = {
+            'project_id': project.id,
+            'identification': 3,
+            'location': 'Test County',
+            'origin_year': 1933,
+            'size': 20
+        }
+        res = self.client.post(STAND_URL, payload)
+
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        stand = Stand.objects.get(id=res.data['id'])
+        for key in payload.keys():
+            if key == 'project_id':
+                self.assertEqual(project, getattr(stand, key))
+            else:
+                self.assertEqual(payload[key], getattr(stand, key))

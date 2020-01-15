@@ -49,7 +49,7 @@ class Project(models.Model):
 
 class Stand(models.Model):
     project_id = models.ForeignKey('Project', on_delete=models.CASCADE)
-    identification = models.IntegerField()
+    identification = models.IntegerField(unique=True)
     location = models.CharField(max_length=255)
     origin_year = models.IntegerField()
     size = models.FloatField()

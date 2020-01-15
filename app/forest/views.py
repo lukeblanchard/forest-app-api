@@ -23,3 +23,18 @@ class ProjectStandsViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         project_id = self.kwargs['project_id']
         return self.queryset.filter(project_id=project_id)
+
+
+class StandViewSet(viewsets.ModelViewSet):
+    """Manage stands in the database"""
+    queryset = Stand.objects.all()
+    serializer_class = serializers.StandSerializer
+
+    def get_queryset(self):
+        """Return stands ordered by project_id"""
+        return self.queryset.order_by('-project_id')
+
+    def perform_create(self, serializer):
+        project_id = self.request.POST['project_id']
+        project = Project.objects.get(pk=project_id)
+        serializer.save(project_id=project)
