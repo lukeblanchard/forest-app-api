@@ -56,3 +56,15 @@ class Stand(models.Model):
 
     def __str__(self):
         return self.location + '::' + str(self.identification)
+
+
+class Plot(models.Model):
+    stand = models.ForeignKey('Stand', on_delete=models.CASCADE)
+    number = models.IntegerField(unique=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    slope = models.FloatField()
+    aspect = models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.stand) + '::' + str(self.number)
