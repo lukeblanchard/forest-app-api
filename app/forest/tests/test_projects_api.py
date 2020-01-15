@@ -10,13 +10,14 @@ from datetime import datetime
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from core.models import Project, Stand
+from core.models import Project, Stand, Plot
 
 from forest.serializers import ProjectSerializer
 
 
 PROJECTS_URL = reverse('forest:project-list')
 STAND_URL = reverse('forest:stand-list')
+PLOT_URL = reverse('forest:plot-list')
 
 
 def project_stands_url(project_id):
@@ -115,10 +116,6 @@ class PublicProjectsApiTest(TestCase):
         sample_stand(project, 1)
         sample_stand(project, 2)
 
-#        stands = Stand.objects.all()
-#        serializer = StandSerializer(stands, many=True)
-#        print(serializer.data)
-#
         url = project_stands_url(project.id)
         res = self.client.get(url)
 
@@ -131,7 +128,7 @@ class PublicStandsApiTest(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-    def test_create_project_successful(self):
+    def test_create_stand_successful(self):
         """Test creating a new stand"""
         project = sample_project()
         payload = {
@@ -150,3 +147,32 @@ class PublicStandsApiTest(TestCase):
                 self.assertEqual(project, getattr(stand, key))
             else:
                 self.assertEqual(payload[key], getattr(stand, key))
+
+
+class PublicPlotsApiTest(TestCase):
+    """Test publicly available plots api"""
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_create_plot_successful(self):
+        """Test creating a new plot"""
+        project = sample_project()
+        stand = sample_stand(project, 4)
+        payload = {
+            'stand': stand.id,
+            'number': 4,
+            'latitude': 41.8781,
+            'longitude': -87.6298,
+            'slope': 2.5,
+            'aspect': 'north'
+        }
+
+        res = self.client.post(PLOT_URL, payload)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        plot = Plot.objects.get(id=res.data['id'])
+        for key in payload.keys():
+            if key == 'stand':
+                self.assertEqual(stand, getattr(plot, key))
+            else:
+                self.assertEqual(payload[key], getattr(plot, key))

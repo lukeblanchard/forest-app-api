@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import Project, Stand
+from core.models import Project, Stand, Plot
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -20,4 +20,15 @@ class StandSerializer(serializers.ModelSerializer):
         model = Stand
         fields = ('id', 'project_id', 'identification', 'location',
                   'origin_year', 'size')
-        read_only_fields = ('id',)
+        read_only_fields = ('id', 'project_id',)
+
+
+class PlotSerializer(serializers.ModelSerializer):
+    """Serializer for plot objects"""
+    stand = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Plot
+        fields = ('id', 'stand', 'number', 'latitude',
+                  'longitude', 'slope', 'aspect')
+        read_only_fields = ('id', 'stand')

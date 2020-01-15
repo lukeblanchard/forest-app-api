@@ -9,6 +9,7 @@ router.register('projects/(?P<project_id>.+)/stands',
                 views.ProjectStandsViewSet,
                 basename='project-stand')
 router.register('stands', views.StandViewSet)
+router.register('plot', views.PlotViewSet)
 
 app_name = 'forest'
 
