@@ -14,9 +14,10 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class StandSerializer(serializers.ModelSerializer):
     """Serializer for stand objects"""
+    project_id = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
-        model = Project
+        model = Stand
         fields = ('id', 'project_id', 'identification', 'location',
                   'origin_year', 'size')
         read_only_fields = ('id', 'project_id',)
