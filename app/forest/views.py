@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from core.models import Project, Stand, Plot
+from core.models import Project, Stand, Plot, Tree, TreeReference
 
 from forest import serializers
 
@@ -16,7 +16,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
 
 class ProjectStandsViewSet(viewsets.ModelViewSet):
-    """Manage stands associated with a given project_id"""
+    """Manage stands associated with a given project"""
     queryset = Stand.objects.all()
     serializer_class = serializers.StandSerializer
 
@@ -41,6 +41,16 @@ class StandViewSet(viewsets.ModelViewSet):
         serializer.save(project_id=project)
 
 
+class StandPlotsViewSet(viewsets.ModelViewSet):
+    """Manage plots associated with a given stand"""
+    queryset = Plot.objects.all()
+    serializer_class = serializers.PlotSerializer
+
+    def get_queryset(self):
+        stand_id = self.kwargs['stand_id']
+        return self.queryset.filter(stand=stand_id)
+
+
 class PlotViewSet(viewsets.ModelViewSet):
     """Manage plots in the database"""
     queryset = Plot.objects.all()
@@ -55,3 +65,23 @@ class PlotViewSet(viewsets.ModelViewSet):
         stand_id = self.request.POST['stand']
         stand = Stand.objects.get(pk=stand_id)
         serializer.save(stand=stand)
+
+
+class TreeReferenceViewSet(viewsets.ModelViewSet):
+    """Manage tree references in the database"""
+    queryset = TreeReference.objects.all()
+    serializer_class = serializers.TreeReferenceSerializer
+
+    def get_queryset(self):
+        """Return tree references ordered by scientific name"""
+        return self.queryset.order_by('-scientific_name')
+
+
+class TreeViewSet(viewsets.ModelViewSet):
+    """Manage trees in the database"""
+    queryset = Tree.objects.all()
+    serializer_class = serializers.TreeSerializer
+
+    def get_queryset(self):
+        """Return trees ordered by plot and symbol"""
+        return self.queryset.order_by('-plot', '-symbol')

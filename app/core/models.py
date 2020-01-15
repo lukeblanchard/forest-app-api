@@ -68,3 +68,26 @@ class Plot(models.Model):
 
     def __str__(self):
         return str(self.stand) + '::' + str(self.number)
+
+
+class TreeReference(models.Model):
+    symbol = models.CharField(max_length=255)
+    scientific_name = models.CharField(max_length=255)
+    common_name = models.CharField(max_length=255)
+    family = models.CharField(max_length=255)
+    max_density_index = models.FloatField()
+
+    def __str__(self):
+        return self.scientific_name
+
+
+class Tree(models.Model):
+    plot = models.ForeignKey('Plot', on_delete=models.CASCADE)
+    symbol = models.ForeignKey('TreeReference', on_delete=models.CASCADE)
+    count = models.IntegerField()
+    dbh = models.FloatField()
+    height = models.FloatField()
+    live_crown_ratio = models.FloatField()
+
+    def __str__(self):
+        return str(self.plot) + '::' + str(self.symbol)

@@ -9,7 +9,12 @@ router.register('projects/(?P<project_id>.+)/stands',
                 views.ProjectStandsViewSet,
                 basename='project-stand')
 router.register('stands', views.StandViewSet)
-router.register('plot', views.PlotViewSet)
+router.register('stands/(?P<stand_id>.+)/plots',
+                views.StandPlotsViewSet,
+                basename='stand-plot')
+router.register('plots', views.PlotViewSet)
+router.register('tree-references', views.TreeReferenceViewSet)
+router.register('trees', views.TreeViewSet)
 
 app_name = 'forest'
 
