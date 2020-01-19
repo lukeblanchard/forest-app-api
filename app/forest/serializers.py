@@ -21,6 +21,9 @@ class StandSerializer(serializers.ModelSerializer):
                   'origin_year', 'size')
         read_only_fields = ('id',)
 
+class StandDetailSerializer(StandSerializer):
+    """Serialize a stand detail"""
+    
 
 class PlotSerializer(serializers.ModelSerializer):
     """Serializer for plot objects"""

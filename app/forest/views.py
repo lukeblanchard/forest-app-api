@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 
+from itertools import chain
+
 from core.models import Project, Stand, Plot, Tree, TreeReference
 
 from forest import serializers
@@ -32,7 +34,19 @@ class StandViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Return stands ordered by project_id"""
+        if self.action == 'retrieve':
+            stand_id = self.kwargs['stand_id']
+            plots = Plot.objects.all().filter(stand=stand_id)
+            return 
+
         return self.queryset.order_by('-project_id')
+
+    def get_serializer_class(self):
+        """Return appropriate serializer class"""
+        if self.action == 'retrieve':
+            return serializers.StandDetailSerializer
+        
+        return self.serializer_class
 
     def perform_create(self, serializer):
         """Save stand object"""
