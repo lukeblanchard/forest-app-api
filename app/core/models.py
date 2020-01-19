@@ -59,7 +59,8 @@ class Stand(models.Model):
 
 
 class Plot(models.Model):
-    stand = models.ForeignKey('Stand', on_delete=models.CASCADE)
+    stand = models.ForeignKey('Stand', on_delete=models.CASCADE,
+                              related_name='plots')
     number = models.IntegerField(unique=True)
     latitude = models.FloatField()
     longitude = models.FloatField()

@@ -14,13 +14,17 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class StandSerializer(serializers.ModelSerializer):
     """Serializer for stand objects"""
+    plots = serializers.SerializerMethodField()
 
     class Meta:
         model = Stand
         fields = ('id', 'project_id', 'identification', 'location',
-                  'origin_year', 'size')
+                  'origin_year', 'size', 'plots')
         read_only_fields = ('id',)
 
+    def get_plots(self, obj):
+        queryset = obj.plots.all()
+        return PlotSerializer(queryset, many=True, read_only=True).data
 
 class PlotSerializer(serializers.ModelSerializer):
     """Serializer for plot objects"""

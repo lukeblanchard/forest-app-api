@@ -44,7 +44,6 @@ class StandViewSet(viewsets.ModelViewSet):
         project = Project.objects.get(pk=project_id)
         serializer.save(project_id=project)
 
-
 class StandPlotsViewSet(viewsets.ModelViewSet):
     """Manage plots associated with a given stand"""
     queryset = Plot.objects.all()
@@ -53,7 +52,6 @@ class StandPlotsViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         stand_id = self.kwargs['stand_id']
         return self.queryset.filter(stand=stand_id)
-
 
 class PlotViewSet(viewsets.ModelViewSet):
     """Manage plots in the database"""
