@@ -8,13 +8,22 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ('id', 'name', 'land_owner', 'date', 'metric_system')
+        fields = ('id', 'name', 'land_owner',
+                  'date', 'metric_system', 'stands')
         read_only_fields = ('id',)
+
+
+class ProjectDetailSerializer(ProjectSerializer):
+    """Serializer for project detail objects"""
+    stands = serializers.SerializerMethodField()
+
+    def get_stands(self, obj):
+        queryset = obj.stands.all()
+        return StandDetailSerializer(queryset, many=True, read_only=True).data
 
 
 class StandSerializer(serializers.ModelSerializer):
     """Serializer for stand objects"""
-    plots = serializers.SerializerMethodField()
 
     class Meta:
         model = Stand
@@ -22,9 +31,15 @@ class StandSerializer(serializers.ModelSerializer):
                   'origin_year', 'size', 'plots')
         read_only_fields = ('id',)
 
+
+class StandDetailSerializer(StandSerializer):
+    """Serializer for stand detail objects"""
+    plots = serializers.SerializerMethodField()
+
     def get_plots(self, obj):
         queryset = obj.plots.all()
-        return PlotSerializer(queryset, many=True, read_only=True).data
+        return PlotDetailSerializer(queryset, many=True, read_only=True).data
+
 
 class PlotSerializer(serializers.ModelSerializer):
     """Serializer for plot objects"""
@@ -32,8 +47,17 @@ class PlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plot
         fields = ('id', 'stand', 'number', 'latitude',
-                  'longitude', 'slope', 'aspect')
+                  'longitude', 'slope', 'aspect', 'trees')
         read_only_fields = ('id',)
+
+
+class PlotDetailSerializer(PlotSerializer):
+    """Serializer for plot detail objects"""
+    trees = serializers.SerializerMethodField()
+
+    def get_trees(self, obj):
+        queryset = obj.trees.all()
+        return TreeSerializer(queryset, many=True, read_only=True).data
 
 
 class TreeReferenceSerializer(serializers.ModelSerializer):

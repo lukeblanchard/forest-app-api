@@ -48,7 +48,8 @@ class Project(models.Model):
 
 
 class Stand(models.Model):
-    project_id = models.ForeignKey('Project', on_delete=models.CASCADE)
+    project_id = models.ForeignKey('Project', on_delete=models.CASCADE,
+                                   related_name='stands')
     identification = models.IntegerField(unique=True)
     location = models.CharField(max_length=255)
     origin_year = models.IntegerField()
@@ -83,7 +84,8 @@ class TreeReference(models.Model):
 
 
 class Tree(models.Model):
-    plot = models.ForeignKey('Plot', on_delete=models.CASCADE)
+    plot = models.ForeignKey('Plot', on_delete=models.CASCADE,
+                             related_name='trees')
     symbol = models.ForeignKey('TreeReference', on_delete=models.CASCADE)
     count = models.IntegerField()
     dbh = models.FloatField()

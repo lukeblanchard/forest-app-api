@@ -14,6 +14,13 @@ class ProjectViewSet(viewsets.ModelViewSet):
         """Return objects ordered by name"""
         return self.queryset.order_by('-name')
 
+    def get_serializer_class(self):
+        """Return appropriate serializer class"""
+        if self.action == 'retrieve':
+            return serializers.ProjectDetailSerializer
+
+        return self.serializer_class
+
 
 class ProjectStandsViewSet(viewsets.ModelViewSet):
     """Manage stands associated with a given project"""
@@ -36,6 +43,9 @@ class StandViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         """Return appropriate serializer class"""
+        if self.action == 'retrieve':
+            return serializers.StandDetailSerializer
+
         return self.serializer_class
 
     def perform_create(self, serializer):
@@ -43,6 +53,7 @@ class StandViewSet(viewsets.ModelViewSet):
         project_id = self.request.POST['project_id']
         project = Project.objects.get(pk=project_id)
         serializer.save(project_id=project)
+
 
 class StandPlotsViewSet(viewsets.ModelViewSet):
     """Manage plots associated with a given stand"""
@@ -52,6 +63,7 @@ class StandPlotsViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         stand_id = self.kwargs['stand_id']
         return self.queryset.filter(stand=stand_id)
+
 
 class PlotViewSet(viewsets.ModelViewSet):
     """Manage plots in the database"""
