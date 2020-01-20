@@ -9,7 +9,7 @@ You need both Docker and Docker Compose
 ### Installing
 Once you have installed Docker and Docker compose, change to the root directory of the project and build the app image with the following command 
 ```
-Docker build .
+docker-compose build
 ```
 
 ### Running tests and lint 
