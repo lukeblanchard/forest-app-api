@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
     PermissionsMixin
 
+from django.contrib.postgres.fields import ArrayField, JSONField
+
 
 class UserManager(BaseUserManager):
 
@@ -42,6 +44,8 @@ class Project(models.Model):
     land_owner = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)
     metric_system = models.BooleanField(default=True)
+    sample_design = ArrayField(models.CharField(max_length=255), size=5, 
+                               default=list, null=True)
 
     def __str__(self):
         return self.name

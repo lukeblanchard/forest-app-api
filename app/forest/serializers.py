@@ -5,11 +5,10 @@ from core.models import Project, Stand, Plot, Tree, TreeReference
 
 class ProjectSerializer(serializers.ModelSerializer):
     """Serializer for project objects"""
-
     class Meta:
         model = Project
         fields = ('id', 'name', 'land_owner',
-                  'date', 'metric_system', 'stands')
+                  'date', 'metric_system', 'stands', 'sample_design')
         read_only_fields = ('id',)
 
 
