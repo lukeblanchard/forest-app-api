@@ -47,8 +47,26 @@ class Project(models.Model):
         return self.name
 
 
+class SampleDesign(models.Model):
+    FRQ = 'FRQ'
+    BAF = 'BAF'
+    SAMPLE_TYPE_CHOICES = [
+        (FRQ, 'FRQ'),
+        (BAF, 'BAF')
+    ]
+    sample_type = models.CharField(max_length=3, choices=SAMPLE_TYPE_CHOICES,
+                                   default=None)
+    project = models.ForeignKey('Project', on_delete=models.CASCADE,
+                                related_name='sample_design')
+    factor = models.IntegerField()
+    var = models.CharField(max_length=3, default=None)
+    minv = models.FloatField()
+    maxv = models.FloatField()
+
+
 class Stand(models.Model):
-    project_id = models.ForeignKey('Project', on_delete=models.CASCADE)
+    project_id = models.ForeignKey('Project', on_delete=models.CASCADE,
+                                   related_name='stands')
     identification = models.IntegerField(unique=True)
     location = models.CharField(max_length=255)
     origin_year = models.IntegerField()
@@ -59,7 +77,8 @@ class Stand(models.Model):
 
 
 class Plot(models.Model):
-    stand = models.ForeignKey('Stand', on_delete=models.CASCADE)
+    stand = models.ForeignKey('Stand', on_delete=models.CASCADE,
+                              related_name='plots')
     number = models.IntegerField(unique=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -82,7 +101,8 @@ class TreeReference(models.Model):
 
 
 class Tree(models.Model):
-    plot = models.ForeignKey('Plot', on_delete=models.CASCADE)
+    plot = models.ForeignKey('Plot', on_delete=models.CASCADE,
+                             related_name='trees')
     symbol = models.ForeignKey('TreeReference', on_delete=models.CASCADE)
     count = models.IntegerField()
     dbh = models.FloatField()

@@ -1,6 +1,8 @@
 from rest_framework import viewsets
+from rest_framework.response import Response
 
-from core.models import Project, Stand, Plot, Tree, TreeReference
+from core.models import Project, Stand, Plot, Tree, TreeReference, \
+    SampleDesign
 
 from forest import serializers
 
@@ -13,6 +15,13 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Return objects ordered by name"""
         return self.queryset.order_by('-name')
+
+    def get_serializer_class(self):
+        """Return appropriate serializer class"""
+        if self.action == 'retrieve':
+            return serializers.ProjectDetailSerializer
+
+        return self.serializer_class
 
 
 class ProjectStandsViewSet(viewsets.ModelViewSet):
@@ -36,6 +45,9 @@ class StandViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         """Return appropriate serializer class"""
+        if self.action == 'retrieve':
+            return serializers.StandDetailSerializer
+
         return self.serializer_class
 
     def perform_create(self, serializer):
@@ -43,6 +55,15 @@ class StandViewSet(viewsets.ModelViewSet):
         project_id = self.request.POST['project_id']
         project = Project.objects.get(pk=project_id)
         serializer.save(project_id=project)
+
+    def retrieve(self, request, pk=None):
+        stand = Stand.objects.get(pk=pk)
+        project_data = serializers.ProjectDetailSerializer(
+            stand.project_id).data
+        stand_data = self.serializer_class(stand).data
+        stand_data['sample_design'] = project_data['sample_design']
+        stand_data['metric_system'] = project_data['metric_system']
+        return Response(stand_data)
 
 
 class StandPlotsViewSet(viewsets.ModelViewSet):
@@ -89,3 +110,11 @@ class TreeViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Return trees ordered by plot and symbol"""
         return self.queryset.order_by('-plot', '-symbol')
+
+
+class SampleDesignViewSet(viewsets.ModelViewSet):
+    queryset = SampleDesign.objects.all()
+    serializer_class = serializers.SampleDesignSerializer
+
+    def get_queryset(self):
+        return self.queryset.order_by('-project')

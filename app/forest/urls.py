@@ -15,6 +15,7 @@ router.register('stands/(?P<stand_id>.+)/plots',
 router.register('plots', views.PlotViewSet)
 router.register('tree-references', views.TreeReferenceViewSet)
 router.register('trees', views.TreeViewSet)
+router.register('sample-designs', views.SampleDesignViewSet)
 
 app_name = 'forest'
 

@@ -14,7 +14,8 @@ from rest_framework.test import APIClient
 
 from core.models import Project, Stand, Plot, Tree, TreeReference
 
-from forest.serializers import ProjectSerializer, StandSerializer
+from forest.serializers import ProjectSerializer, StandSerializer, \
+    ProjectDetailSerializer
 
 
 PROJECTS_URL = reverse('forest:project-list')
@@ -207,8 +208,13 @@ class PublicStandsApiTest(TestCase):
         res = self.client.get(url)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        serializer = StandSerializer(stand)
-        self.assertEqual(res.data, serializer.data)
+        stand_data = StandSerializer(stand).data
+        project_data = ProjectDetailSerializer(
+            stand.project_id).data
+        stand_data['sample_design'] = project_data['sample_design']
+        stand_data['metric_system'] = project_data['metric_system']
+
+        self.assertEqual(res.data, stand_data)
 
     def test_view_stand_plots(self):
         """Test viewing plots for a single stand"""
