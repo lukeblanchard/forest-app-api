@@ -44,7 +44,7 @@ class Project(models.Model):
     land_owner = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)
     metric_system = models.BooleanField(default=True)
-    sample_design = ArrayField(models.CharField(max_length=255), size=5, 
+    sample_design = ArrayField(JSONField(), size=5,
                                default=list, null=True)
 
     def __str__(self):
