@@ -44,11 +44,26 @@ class Project(models.Model):
     land_owner = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)
     metric_system = models.BooleanField(default=True)
-    sample_design = ArrayField(JSONField(), size=5,
-                               default=list, null=True)
 
     def __str__(self):
         return self.name
+
+
+class SampleDesign(models.Model):
+    FRQ = 'FRQ'
+    BAF = 'BAF'
+    SAMPLE_TYPE_CHOICES = [
+        (FRQ, 'FRQ'),
+        (BAF, 'BAF')
+    ]
+    sample_type = models.CharField(max_length=3, choices=SAMPLE_TYPE_CHOICES,
+                                   default=None)
+    project = models.ForeignKey('Project', on_delete=models.CASCADE,
+                                related_name='sample_design')
+    factor = models.IntegerField()
+    var = models.CharField(max_length=3, default=None)
+    minv = models.FloatField()
+    maxv = models.FloatField()
 
 
 class Stand(models.Model):

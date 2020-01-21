@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from core.models import Project, Stand, Plot, Tree, TreeReference
+from core.models import Project, Stand, Plot, Tree, TreeReference, \
+    SampleDesign
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -15,10 +16,24 @@ class ProjectSerializer(serializers.ModelSerializer):
 class ProjectDetailSerializer(ProjectSerializer):
     """Serializer for project detail objects"""
     stands = serializers.SerializerMethodField()
+    sample_design = serializers.SerializerMethodField()
 
     def get_stands(self, obj):
         queryset = obj.stands.all()
         return StandDetailSerializer(queryset, many=True, read_only=True).data
+
+    def get_sample_design(self, obj):
+        queryset = obj.sample_design.all()
+        return SampleDesignSerializer(queryset, many=True, read_only=True).data
+
+
+class SampleDesignSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SampleDesign
+        fields = ('id', 'sample_type', 'project', 'factor', 'var', 'minv',
+                  'maxv')
+        read_only_fields = ('id',)
 
 
 class StandSerializer(serializers.ModelSerializer):
