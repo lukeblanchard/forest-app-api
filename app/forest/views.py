@@ -1,8 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from json import loads
-
 from core.models import Project, Stand, Plot, Tree, TreeReference, \
     SampleDesign
 

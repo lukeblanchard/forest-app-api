@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
     PermissionsMixin
 
-from django.contrib.postgres.fields import ArrayField, JSONField
-
 
 class UserManager(BaseUserManager):
 
