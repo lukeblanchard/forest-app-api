@@ -10,7 +10,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('id', 'name', 'land_owner',
                   'date', 'metric_system', 'stands', 'sample_design')
-        read_only_fields = ('id',)
+        read_only_fields = ('id', 'stands', 'sample_design',)
 
 
 class ProjectDetailSerializer(ProjectSerializer):
@@ -43,7 +43,7 @@ class StandSerializer(serializers.ModelSerializer):
         model = Stand
         fields = ('id', 'project_id', 'identification', 'location',
                   'origin_year', 'size', 'plots')
-        read_only_fields = ('id',)
+        read_only_fields = ('id', 'plots')
 
 
 class StandDetailSerializer(StandSerializer):
@@ -62,7 +62,7 @@ class PlotSerializer(serializers.ModelSerializer):
         model = Plot
         fields = ('id', 'stand', 'number', 'latitude',
                   'longitude', 'slope', 'aspect', 'trees')
-        read_only_fields = ('id',)
+        read_only_fields = ('id', 'trees',)
 
 
 class PlotDetailSerializer(PlotSerializer):
