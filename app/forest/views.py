@@ -62,7 +62,7 @@ class StandViewSet(viewsets.ModelViewSet):
             stand.project_id).data
         stand_data = self.serializer_class(stand).data
         stand_data['sample_design'] = project_data['sample_design']
-        stand_data['metric_system'] = project_data['metric_system']
+        stand_data['measurement_system'] = project_data['measurement_system']
         return Response(stand_data)
 
 

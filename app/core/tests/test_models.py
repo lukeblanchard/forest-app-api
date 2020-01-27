@@ -21,7 +21,7 @@ def sample_project(**params):
     defaults = {
         'name': 'Test Project A',
         'land_owner': 'Test Owner A',
-        'metric_system': True
+        'measurement_system': 'english'
     }
     defaults.update(params)
 
@@ -142,7 +142,9 @@ class ModelTests(TestCase):
             family='test fam',
             max_density_index=295
         )
-        self.assertEqual(str(tree_reference), tree_reference.scientific_name)
+        str_rep = (tree_reference.scientific_name + "::" +
+                   tree_reference.common_name)
+        self.assertEqual(str(tree_reference), str_rep)
 
     def test_tree_str(self):
         """Test tree string representation"""
