@@ -40,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Project(models.Model):
     ENG = 'english'
     MET = 'metric'
-    SYSTEM_CHOICES[
+    SYSTEM_CHOICES = [
         (ENG, 'english'),
         (MET, 'metric')
     ]
@@ -48,7 +48,8 @@ class Project(models.Model):
     name = models.CharField(max_length=255)
     land_owner = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)
-    measurement_system = models.CharField(max_length=8, choices=SYSTEM_CHOICES)
+    measurement_system = models.CharField(max_length=8, choices=SYSTEM_CHOICES,
+                                          default=MET)
 
     def __str__(self):
         return self.name
@@ -74,7 +75,8 @@ class SampleDesign(models.Model):
     project = models.ForeignKey('Project', on_delete=models.CASCADE,
                                 related_name='sample_design')
     factor = models.IntegerField()
-    var = models.CharField(max_length=3, choices=VAR_TYPE_CHOICES, default=None)
+    var = models.CharField(max_length=3, choices=VAR_TYPE_CHOICES,
+                           default=None)
     minv = models.FloatField()
     maxv = models.FloatField()
 
