@@ -38,10 +38,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Project(models.Model):
+    ENG = 'english'
+    MET = 'metric'
+    SYSTEM_CHOICES[
+        (ENG, 'english'),
+        (MET, 'metric')
+    ]
+
     name = models.CharField(max_length=255)
     land_owner = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)
-    metric_system = models.BooleanField(default=True)
+    measurement_system = models.CharField(max_length=8, choices=SYSTEM_CHOICES)
 
     def __str__(self):
         return self.name
@@ -54,12 +61,20 @@ class SampleDesign(models.Model):
         (FRQ, 'FRQ'),
         (BAF, 'BAF')
     ]
+
+    HGT = 'HGT'
+    DBH = 'DBH'
+    VAR_TYPE_CHOICES = [
+        (HGT, 'HGT'),
+        (DBH, 'DBH')
+    ]
+
     sample_type = models.CharField(max_length=3, choices=SAMPLE_TYPE_CHOICES,
                                    default=None)
     project = models.ForeignKey('Project', on_delete=models.CASCADE,
                                 related_name='sample_design')
     factor = models.IntegerField()
-    var = models.CharField(max_length=3, default=None)
+    var = models.CharField(max_length=3, choices=VAR_TYPE_CHOICES, default=None)
     minv = models.FloatField()
     maxv = models.FloatField()
 
@@ -94,10 +109,10 @@ class TreeReference(models.Model):
     scientific_name = models.CharField(max_length=255)
     common_name = models.CharField(max_length=255)
     family = models.CharField(max_length=255)
-    max_density_index = models.FloatField()
+    max_density_index = models.IntegerField(default=None)
 
     def __str__(self):
-        return self.scientific_name
+        return self.scientific_name + '::' + self.common_name
 
 
 class Tree(models.Model):
@@ -107,7 +122,7 @@ class Tree(models.Model):
     count = models.IntegerField()
     dbh = models.FloatField()
     height = models.FloatField()
-    live_crown_ratio = models.FloatField()
+    live_crown_ratio = models.IntegerField()
 
     def __str__(self):
         return str(self.plot) + '::' + str(self.symbol)
