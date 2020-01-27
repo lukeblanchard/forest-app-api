@@ -21,7 +21,7 @@ def sample_project(**params):
     defaults = {
         'name': 'Test Project A',
         'land_owner': 'Test Owner A',
-        'metric_system': True
+        'measurement_system': 'metric'
     }
     defaults.update(params)
 
