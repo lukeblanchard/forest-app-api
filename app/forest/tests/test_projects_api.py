@@ -56,7 +56,7 @@ def sample_project(**params):
     defaults = {
         'name': 'Test Project A',
         'land_owner': 'Test Owner A',
-        'metric_system': True
+        'measurement_system': 'english'
     }
     defaults.update(params)
 
@@ -118,10 +118,10 @@ class PublicProjectsApiTest(TestCase):
                         mock.Mock(return_value=mock_time)):
             Project.objects.create(name='Test Project A',
                                    land_owner='Test Owner A',
-                                   metric_system=False)
+                                   measurement_system='english')
             Project.objects.create(name='Test Project B',
                                    land_owner='Test Owner B',
-                                   metric_system=True)
+                                   measurement_system='metric')
 
         res = self.client.get(PROJECTS_URL)
 
@@ -134,7 +134,8 @@ class PublicProjectsApiTest(TestCase):
     def test_create_project_successful(self):
         """Test creating a new project"""
         payload = {'name': 'Test project C',
-                   'land_owner': 'Test Owner C', 'metric_system': True}
+                   'land_owner': 'Test Owner C',
+                   'measurement_system': 'metric'}
         self.client.post(PROJECTS_URL, payload)
 
         exists = Project.objects.filter(
@@ -146,7 +147,8 @@ class PublicProjectsApiTest(TestCase):
     def test_create_project_invalid(self):
         """Test creating a project with invalid payload"""
         payload = {'name': '',
-                   'land_owner': 'Test Owner C', 'metric_system': True}
+                   'land_owner': 'Test Owner C',
+                   'measurement_system': 'metric'}
         res = self.client.post(PROJECTS_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
@@ -212,7 +214,7 @@ class PublicStandsApiTest(TestCase):
         project_data = ProjectDetailSerializer(
             stand.project_id).data
         stand_data['sample_design'] = project_data['sample_design']
-        stand_data['metric_system'] = project_data['metric_system']
+        stand_data['measurement_system'] = project_data['measurement_system']
 
         self.assertEqual(res.data, stand_data)
 
