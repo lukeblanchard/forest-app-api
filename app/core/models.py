@@ -95,7 +95,7 @@ class Stand(models.Model):
 
 class Plot(models.Model):
     stand = models.ForeignKey('Stand', on_delete=models.CASCADE,
-                              related_name='plots')
+                             related_name='plots')
     number = models.IntegerField(unique=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -111,7 +111,7 @@ class TreeReference(models.Model):
     scientific_name = models.CharField(max_length=255)
     common_name = models.CharField(max_length=255)
     family = models.CharField(max_length=255)
-    max_density_index = models.IntegerField(default=None)
+    max_density_index = models.IntegerField(null=True)
 
     def __str__(self):
         return self.scientific_name + '::' + self.common_name
