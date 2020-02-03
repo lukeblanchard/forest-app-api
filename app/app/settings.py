@@ -23,11 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$rg2hmj8qo&!!za8eas)=beo9^9@**7_z+)1dm7+p1!va2i(*0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.99.100', '127.0.0.1']
+ALLOWED_HOSTS = [os.environ.get('DJANGO_ALLOWED_HOSTS')]
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+FIXTURE_DIRS = ['./core/fixtures']
 
 # Application definition
 
