@@ -25,7 +25,7 @@ SECRET_KEY = '$rg2hmj8qo&!!za8eas)=beo9^9@**7_z+)1dm7+p1!va2i(*0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.99.100']
+ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
