@@ -5,11 +5,11 @@ services:
     command: >
       sh -c "python manage.py migrate && gunicorn app.wsgi:application --bind 0.0.0.0:8000"
     expose:
-      - '8000'
+      - 8000:8000
     environment:
       - DEBUG=0
       - SECRET_KEY=supersecretkey
-      - DJANGO_ALLOWED_HOSTS=3.94.114.158
+      - DJANGO_ALLOWED_HOSTS=*
       - DB_HOST=db
       - DB_NAME=app
       - DB_USER=postgres
