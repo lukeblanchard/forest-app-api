@@ -3,9 +3,11 @@ services:
   app:
     image: 171754680472.dkr.ecr.us-east-1.amazonaws.com/forest-app
     command: >
-      sh -c "python manage.py migrate && gunicorn app.wsgi:application --bind 0.0.0.0:8000"
+      sh -c "python manage.py migrate &&
+             python manage.py loaddata ./fixtures/tree-data.json &&
+             gunicorn app.wsgi:application --bind 0.0.0.0:8000"
     expose:
-      - 8000:8000
+      - 8000
     environment:
       - DEBUG=0
       - SECRET_KEY=supersecretkey
