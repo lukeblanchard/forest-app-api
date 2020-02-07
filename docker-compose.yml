@@ -1,7 +1,8 @@
 version: '3'
 services:
   app:
-    image: 171754680472.dkr.ecr.us-east-1.amazonaws.com/forest-app
+    build: 
+        context: .
     command: >
       sh -c "python manage.py migrate &&
              python manage.py loaddata ./fixtures/tree-data.json &&
@@ -22,7 +23,8 @@ services:
       - db
 
   nginx:
-    image: 171754680472.dkr.ecr.us-east-1.amazonaws.com/forest-app-nginx
+    build: 
+        context: ./nginx
     ports:
       - 80:80
     depends_on:
