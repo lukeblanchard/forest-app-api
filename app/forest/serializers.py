@@ -71,7 +71,7 @@ class PlotDetailSerializer(PlotSerializer):
 
     def get_trees(self, obj):
         queryset = obj.trees.all()
-        return TreeSerializer(queryset, many=True, read_only=True).data
+        return TreeDetailSerializer(queryset, many=True, read_only=True).data
 
 
 class TreeReferenceSerializer(serializers.ModelSerializer):
@@ -80,7 +80,7 @@ class TreeReferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = TreeReference
         fields = ('id', 'symbol', 'scientific_name',
-                  'common_name', 'family', 'max_density_index')
+                  'common_name')
         read_only_fields = ('id',)
 
 
@@ -92,3 +92,14 @@ class TreeSerializer(serializers.ModelSerializer):
         fields = ('id', 'plot', 'symbol', 'count',
                   'dbh', 'height', 'live_crown_ratio')
         read_only_fields = ('id',)
+
+
+class TreeRefSymbolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TreeReference
+        fields = ('symbol')
+        read_only_fields = ('symbol',)
+
+
+class TreeDetailSerializer(TreeSerializer):
+    symbol = TreeRefSymbolSerializer(read_only=True)

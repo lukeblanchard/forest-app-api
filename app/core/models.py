@@ -110,8 +110,6 @@ class TreeReference(models.Model):
     symbol = models.CharField(max_length=255)
     scientific_name = models.CharField(max_length=255)
     common_name = models.CharField(max_length=255)
-    family = models.CharField(max_length=255)
-    max_density_index = models.IntegerField(null=True)
 
     def __str__(self):
         return self.scientific_name + '::' + self.common_name

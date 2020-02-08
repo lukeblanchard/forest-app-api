@@ -94,11 +94,18 @@ class PlotViewSet(viewsets.ModelViewSet):
         stand = Stand.objects.get(pk=stand_id)
         serializer.save(stand=stand)
 
+    def get_serializer_class(self):
+        """Return appropriate serializer class"""
+        if self.action == 'retrieve':
+            return serializers.PlotDetailSerializer
+
+        return self.serializer_class
+
 
 class TreeReferenceViewSet(viewsets.ModelViewSet):
     """Manage tree references in the database"""
     queryset = TreeReference.objects.all()
-    serializer_class = serializers.TreeReferenceSerializer
+    serializer_class = serializers.TreeRefSymbolSerializer
 
     def get_queryset(self):
         """Return tree references ordered by scientific name"""
