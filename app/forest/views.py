@@ -61,6 +61,7 @@ class StandViewSet(viewsets.ModelViewSet):
         project_data = serializers.ProjectDetailSerializer(
             stand.project_id).data
         stand_data = serializers.StandDetailSerializer(stand).data
+        stand_data['plots'] = [plot['trees'] for plot in stand_data['plots']]
         stand_data['owner'] = project_data['land_owner']
         stand_data['num_plots'] = len(stand_data['plots'])
         stand_data['project'] = project_data['name']
@@ -105,7 +106,7 @@ class PlotViewSet(viewsets.ModelViewSet):
 class TreeReferenceViewSet(viewsets.ModelViewSet):
     """Manage tree references in the database"""
     queryset = TreeReference.objects.all()
-    serializer_class = serializers.TreeRefSymbolSerializer
+    serializer_class = serializers.TreeReferenceSerializer
 
     def get_queryset(self):
         """Return tree references ordered by scientific name"""

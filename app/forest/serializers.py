@@ -97,8 +97,8 @@ class TreeSerializer(serializers.ModelSerializer):
 class TreeRefSymbolSerializer(serializers.ModelSerializer):
     class Meta:
         model = TreeReference
-        fields = ('symbol')
-        read_only_fields = ('symbol',)
+        fields = ('id', 'symbol')
+        read_only_fields = ('id', 'symbol',)
 
 
 class TreeDetailSerializer(TreeSerializer):
