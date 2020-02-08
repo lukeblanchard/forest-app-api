@@ -61,7 +61,14 @@ class StandViewSet(viewsets.ModelViewSet):
         project_data = serializers.ProjectDetailSerializer(
             stand.project_id).data
         stand_data = serializers.StandDetailSerializer(stand).data
-        stand_data['plots'] = [plot['trees'] for plot in stand_data['plots']]
+        plots = [plot['trees'] for plot in stand_data['plots']]
+        stand_plots = []
+        for plot in plots:
+            for tree in plot:
+                t = tree.copy()
+                t['symbol'] = tree['symbol']['symbol']
+                stand_plots.append(t)
+        stand_data['plots'] = stand_plots
         stand_data['owner'] = project_data['land_owner']
         stand_data['num_plots'] = len(stand_data['plots'])
         stand_data['project'] = project_data['name']
