@@ -202,22 +202,6 @@ class PublicStandsApiTest(TestCase):
             else:
                 self.assertEqual(payload[key], getattr(stand, key))
 
-    def test_view_stand_detail(self):
-        """Test viewing single stand detail"""
-        project = sample_project()
-        stand = sample_stand(project)
-        url = stand_detail_url(stand.id)
-        res = self.client.get(url)
-
-        self.assertEqual(res.status_code, status.HTTP_200_OK)
-        stand_data = StandSerializer(stand).data
-        project_data = ProjectDetailSerializer(
-            stand.project_id).data
-        stand_data['sample_design'] = project_data['sample_design']
-        stand_data['measurement_system'] = project_data['measurement_system']
-
-        self.assertEqual(res.data, stand_data)
-
     def test_view_stand_plots(self):
         """Test viewing plots for a single stand"""
         project = sample_project()
