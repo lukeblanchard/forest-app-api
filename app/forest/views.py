@@ -60,7 +60,10 @@ class StandViewSet(viewsets.ModelViewSet):
         stand = Stand.objects.get(pk=pk)
         project_data = serializers.ProjectDetailSerializer(
             stand.project_id).data
-        stand_data = self.serializer_class(stand).data
+        stand_data = serializers.StandDetailSerializer(stand).data
+        stand_data['owner'] = project_data['land_owner']
+        stand_data['num_plots'] = len(stand_data['plots'])
+        stand_data['project'] = project_data['name']
         stand_data['sample_design'] = project_data['sample_design']
         stand_data['measurement_system'] = project_data['measurement_system']
         return Response(stand_data)
