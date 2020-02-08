@@ -14,8 +14,7 @@ from rest_framework.test import APIClient
 
 from core.models import Project, Stand, Plot, Tree, TreeReference
 
-from forest.serializers import ProjectSerializer, StandSerializer, \
-    ProjectDetailSerializer
+from forest.serializers import ProjectSerializer
 
 
 PROJECTS_URL = reverse('forest:project-list')
