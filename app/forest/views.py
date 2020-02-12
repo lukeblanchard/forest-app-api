@@ -64,10 +64,12 @@ class StandViewSet(viewsets.ModelViewSet):
         plots = [plot['trees'] for plot in stand_data['plots']]
         stand_plots = []
         for plot in plots:
+            plot_arr = []
             for tree in plot:
                 t = tree.copy()
                 t['symbol'] = tree['symbol']['symbol']
-                stand_plots.append(t)
+                plot_arr.append(t)
+            stand_plots.append(plot_arr)
         stand_data['plots'] = stand_plots
         stand_data['owner'] = project_data['land_owner']
         stand_data['num_plots'] = len(stand_data['plots'])
