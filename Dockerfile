@@ -16,4 +16,4 @@ COPY ./app /app
 RUN adduser -D user
 USER user
 
-ENTRYPOINT ["/app/entrypoint.prod.sh"]
+# ENTRYPOINT ["/app/entrypoint.prod.sh"]

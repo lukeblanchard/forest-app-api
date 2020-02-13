@@ -1,0 +1,9 @@
+[
+    {"model": "core.SampleDesign", "pk": 5, "fields": {"sample_type": "BAF", "project": 4, "factor": 10, "var": "DBH", "minv": 5.0, "maxv": 999.0}},
+    {"model": "core.SampleDesign", "pk": 6, "fields": {"sample_type": "FRQ", "project": 4, "factor": 100, "var": "DBH", "minv": 0.1, "maxv": 4.9}},
+    {"model": "core.SampleDesign", "pk": 7, "fields": {"sample_type": "FRQ", "project": 4, "factor": 100, "var": "HGT", "minv": 0.1, "maxv": 4.4}}, 
+    {"model": "core.SampleDesign", "pk": 1, "fields": {"sample_type": "BAF", "project": 2, "factor": 20, "var": "DBH", "minv": 5.0, "maxv": 999.0}},
+    {"model": "core.SampleDesign", "pk": 2, "fields": {"sample_type": "FRQ", "project": 2, "factor": 100, "var": "DBH", "minv": 0.1, "maxv": 4.9}},
+    {"model": "core.SampleDesign", "pk": 3, "fields": {"sample_type": "FRQ", "project": 2, "factor": 100, "var": "HGT", "minv": 0.1, "maxv": 4.4}},
+    {"model": "core.SampleDesign", "pk": 4, "fields": {"sample_type": "FRQ", "project": 1, "factor": 50, "var": "DBH", "minv": 10.0, "maxv": 999.0}}
+]

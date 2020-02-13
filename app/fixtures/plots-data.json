@@ -1,0 +1,6 @@
+[
+    {"model": "core.Plot", "pk": 3, "fields": {"stand": 3, "number": 3, "latitude": 33.74, "longitude": 85.64, "slope": 20.0, "aspect": "270"}}, 
+    {"model": "core.Plot", "pk": 4, "fields": {"stand": 3, "number": 4, "latitude": 33.7387, "longitude": 86.6623, "slope": 15.0, "aspect": "90"}},
+    {"model": "core.Plot", "pk": 1, "fields": {"stand": 2, "number": 1, "latitude": 30.23, "longitude": 84.3, "slope": 5.0, "aspect": "0"}},
+    {"model": "core.Plot", "pk": 2, "fields": {"stand": 2, "number": 2, "latitude": 30.0, "longitude": 84.0, "slope": 0.0, "aspect": "0"}}
+]

@@ -1,0 +1,26 @@
+[
+    {"model": "core.Plot", "pk": 16, "fields": {"plot": 4, "symbol": 96, "count": 1, "dbh": 14.2, "height": 80.0, "live_crown_ratio": 45}},
+    {"model": "core.Plot", "pk": 20, "fields": {"plot": 4, "symbol": 71, "count": 1, "dbh": 14.5, "height": 85.0, "live_crown_ratio": 35}},
+    {"model": "core.Plot", "pk": 19, "fields": {"plot": 4, "symbol": 71, "count": 1, "dbh": 13.1, "height": 80.0, "live_crown_ratio": 35}},
+    {"model": "core.Plot", "pk": 18, "fields": {"plot": 4, "symbol": 71, "count": 1, "dbh": 12.4, "height": 80.0, "live_crown_ratio": 35}},
+    {"model": "core.Plot", "pk": 17, "fields": {"plot": 4, "symbol": 71, "count": 1, "dbh": 9.1, "height": 70.0, "live_crown_ratio": 25}},
+    {"model": "core.Plot", "pk": 21, "fields": {"plot": 4, "symbol": 46, "count": 1, "dbh": 11.9, "height": 70.0, "live_crown_ratio": 35}}, 
+    {"model": "core.Plot", "pk": 14, "fields": {"plot": 3, "symbol": 75, "count": 1, "dbh": 7.2, "height": 40.0, "live_crown_ratio": 45}},
+    {"model": "core.Plot", "pk": 11, "fields": {"plot": 3, "symbol": 71, "count": 1, "dbh": 10.4, "height": 65.0, "live_crown_ratio": 25}},
+    {"model": "core.Plot", "pk": 10, "fields": {"plot": 3, "symbol": 71, "count": 1, "dbh": 9.7, "height": 65.0, "live_crown_ratio": 25}},
+    {"model": "core.Plot", "pk": 15, "fields": {"plot": 3, "symbol": 71, "count": 1, "dbh": 14.2, "height": 80.0, "live_crown_ratio": 35}},
+    {"model": "core.Plot", "pk": 12, "fields": {"plot": 3, "symbol": 46, "count": 1, "dbh": 8.7, "height": 60.0, "live_crown_ratio": 25}},
+    {"model": "core.Plot", "pk": 13, "fields": {"plot": 3, "symbol": 39, "count": 1, "dbh": 14.0, "height": 70.0, "live_crown_ratio": 45}},
+    {"model": "core.Plot", "pk": 6, "fields": {"plot": 2, "symbol": 74, "count": 1, "dbh": 13.1, "height": 75.0, "live_crown_ratio": 40}},
+    {"model": "core.Plot", "pk": 9, "fields": {"plot": 2, "symbol": 74, "count": 1, "dbh": 10.9, "height": 65.0, "live_crown_ratio": 25}},
+    {"model": "core.Plot", "pk": 8, "fields": {"plot": 2, "symbol": 74, "count": 1, "dbh": 12.2, "height": 65.0, "live_crown_ratio": 40}},
+    {"model": "core.Plot", "pk": 7, "fields": {"plot": 2, "symbol": 74, "count": 1, "dbh": 7.2, "height": 55.0, "live_crown_ratio": 15}},
+    {"model": "core.Plot", "pk": 3, "fields": {"plot": 1, "symbol": 74, "count": 1, "dbh": 9.6, "height": 55.0, "live_crown_ratio": 20}},
+    {"model": "core.Plot", "pk": 2, "fields": {"plot": 1, "symbol": 74, "count": 1, "dbh": 11.2, "height": 70.0, "live_crown_ratio": 35}},
+    {"model": "core.Plot", "pk": 4, "fields": {"plot": 1, "symbol": 74, "count": 1, "dbh": 12.3, "height": 75.0, "live_crown_ratio": 40}},
+    {"model": "core.Plot", "pk": 1, "fields": {"plot": 1, "symbol": 74, "count": 1, "dbh": 10.0, "height": 65.0, "live_crown_ratio": 30}},
+    {"model": "core.Plot", "pk": 5, "fields": {"plot": 1, "symbol": 62, "count": 1, "dbh": 4.0, "height": 45.0, "live_crown_ratio": 40}}
+
+    
+
+]
