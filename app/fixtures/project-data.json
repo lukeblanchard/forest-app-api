@@ -1,0 +1,42 @@
+[
+  {
+    "model": "core.Project",
+    "pk": 1,
+    "fields": {
+      "name": "Shoal Creek",
+      "land_owner": "Clarke-McNary",
+      "date": "2020-02-10T01:48:36.935592Z",
+      "measurement_system": "english"
+    }
+  },
+  {
+    "model": "core.Project",
+    "pk": 2,
+    "fields": {
+      "name": "Grey Towers",
+      "land_owner": "Gifford Pinchot",
+      "date": "2020-02-10T01:48:36.935592Z",
+      "measurement_system": "ENG"
+    }
+  },
+  {
+    "model": "core.Project",
+    "pk": 3,
+    "fields": {
+      "name": "Biltmore",
+      "land_owner": "George Vanderbilt",
+      "date": "2020-02-10T01:48:36.935592Z",
+      "measurement_system": "ENG"
+    }
+  },
+  {
+    "model": "core.Project",
+    "pk": 4,
+    "fields": {
+      "name": "Apalachicola Northern Rail",
+      "land_owner": "Edward Ball",
+      "date": "2020-02-10T01:48:36.935592Z",
+      "measurement_system": "ENG"
+    }
+  }
+]

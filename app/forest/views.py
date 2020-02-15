@@ -92,7 +92,7 @@ class StandPlotsViewSet(viewsets.ModelViewSet):
 class PlotTreesViewSet(viewsets.ModelViewSet):
     """Manage plots associated with a given stand"""
     queryset = Tree.objects.all()
-    serializer_class = serializers.PlotSerializer
+    serializer_class = serializers.TreeSerializer
 
     def get_queryset(self):
         plot_id = self.kwargs['plot_id']
@@ -102,7 +102,7 @@ class PlotTreesViewSet(viewsets.ModelViewSet):
 class ProjectSampleDesignsViewSet(viewsets.ModelViewSet):
     """Manage plots associated with a given stand"""
     queryset = SampleDesign.objects.all()
-    serializer_class = serializers.PlotSerializer
+    serializer_class = serializers.SampleDesignSerializer
 
     def get_queryset(self):
         project_id = self.kwargs['project_id']
