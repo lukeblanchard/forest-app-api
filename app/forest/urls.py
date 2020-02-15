@@ -12,6 +12,12 @@ router.register('stands', views.StandViewSet)
 router.register('stands/(?P<stand_id>.+)/plots',
                 views.StandPlotsViewSet,
                 basename='stand-plot')
+router.register('plots/(?P<plot_id>.+)/trees',
+                views.PlotTreesViewSet,
+                basename='plot-tree')
+router.register('projects/(?P<project_id>.+)/sample-designs',
+                views.ProjectSampleDesignsViewSet,
+                basename='project-sample-designs')
 router.register('plots', views.PlotViewSet)
 router.register('tree-references', views.TreeReferenceViewSet)
 router.register('trees', views.TreeViewSet)

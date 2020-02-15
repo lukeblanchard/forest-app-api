@@ -89,6 +89,26 @@ class StandPlotsViewSet(viewsets.ModelViewSet):
         return self.queryset.filter(stand=stand_id)
 
 
+class PlotTreesViewSet(viewsets.ModelViewSet):
+    """Manage plots associated with a given stand"""
+    queryset = Tree.objects.all()
+    serializer_class = serializers.PlotSerializer
+
+    def get_queryset(self):
+        plot_id = self.kwargs['plot_id']
+        return self.queryset.filter(plot=plot_id)
+
+
+class ProjectSampleDesignsViewSet(viewsets.ModelViewSet):
+    """Manage plots associated with a given stand"""
+    queryset = SampleDesign.objects.all()
+    serializer_class = serializers.PlotSerializer
+
+    def get_queryset(self):
+        project_id = self.kwargs['project_id']
+        return self.queryset.filter(project=project_id)
+
+
 class PlotViewSet(viewsets.ModelViewSet):
     """Manage plots in the database"""
     queryset = Plot.objects.all()
