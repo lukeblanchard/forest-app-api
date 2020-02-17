@@ -1,0 +1,14 @@
+[
+  {
+    "ParameterKey": "VpcId",
+    "ParameterValue": "vpc-e9642d93"
+  },
+  {
+    "ParameterKey": "Subnets",
+    "ParameterValue": "subnet-9295abce,subnet-9295abce"
+  },
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "MyDevKeyPair"
+  }
+]
