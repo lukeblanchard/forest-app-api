@@ -152,7 +152,7 @@ class TreeViewSet(viewsets.ModelViewSet):
         return self.queryset.order_by('-plot')
 
     def list(self, request):
-        trees = self.serializer_class(self.queryset, many=True).data
+        trees = serializers.TreeSerializer(Tree.objects.all(), many=True).data
         for tree in trees:
             sym = tree['symbol']
             ref = TreeReference.objects.get(pk=sym)
