@@ -149,7 +149,15 @@ class TreeViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Return trees ordered by plot and symbol"""
-        return self.queryset.order_by('-plot', '-symbol')
+        return self.queryset.order_by('-plot')
+
+    def list(self, request):
+        trees = self.serializer_class(self.queryset, many=True).data
+        for tree in trees:
+            sym = tree['symbol']
+            ref = TreeReference.objects.get(pk=sym)
+            tree['symbol'] = serializers.TreeReferenceSerializer(ref).data
+        return Response(trees)
 
 
 class SampleDesignViewSet(viewsets.ModelViewSet):
