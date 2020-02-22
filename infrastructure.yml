@@ -23,6 +23,14 @@ Parameters:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instances
     Type: 'AWS::EC2::KeyPair::KeyName'
     ConstraintDescription: must be the name of an existing EC2 KeyPair.
+  ElasticLoadBalancer:
+    Description: ARN of an existing Application Load Balancer
+    Type: String
+    ConstraintDescription: must be the name of an existing ALB.
+  SSLCertificate:
+    Description: ARN of existing SSL cert
+    Type: String
+    ConstraintDescription: must be the name of an existing SSL associated with ALB.
 Mappings:
   AWSInstanceType2Arch:
     t2.micro:
@@ -38,6 +46,8 @@ Resources:
       LaunchConfigurationName: !Ref LaunchConfig
       MinSize: '2'
       MaxSize: '2'
+      TargetGroupARNs:
+        - !Ref TargetGroup
   LaunchConfig:
     Type: 'AWS::AutoScaling::LaunchConfiguration'
     Properties:
@@ -59,7 +69,14 @@ Resources:
               #!/bin/bash -xe
             - |
               sudo amazon-linux-extras install docker
-              sudo service docker start
+              sudo service docker start 
+              sudo yum install git -y
+              sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
+              sudo chmod +x /usr/local/bin/docker-compose
+              sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+              cd forest-app-api
+              sudo docker-compose build
+              sudo docker-compose up &
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
@@ -74,3 +91,21 @@ Resources:
           ToPort: '80'
           CidrIp: 0.0.0.0/0
       VpcId: !Ref VpcId
+  LoadBalancerListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      Certificates:
+        - CertificateArn: !Ref SSLCertificate
+      LoadBalancerArn: !Ref ElasticLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      VpcId: !Ref VpcId
+      TargetType: instance
+      Port: 80
+      Protocol: HTTP

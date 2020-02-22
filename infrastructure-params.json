@@ -5,10 +5,18 @@
   },
   {
     "ParameterKey": "Subnets",
-    "ParameterValue": "subnet-9295abce,subnet-9295abce"
+    "ParameterValue": "subnet-9295abce,subnet-28004016"
   },
   {
     "ParameterKey": "KeyName",
     "ParameterValue": "MyDevKeyPair"
+  },
+  {
+    "ParameterKey": "SSLCertificate",
+    "ParameterValue": "arn:aws:acm:us-east-1:171754680472:certificate/f9078d49-b43d-4cb3-97eb-f8002879c8df"
+  },
+  {
+    "ParameterKey": "ElasticLoadBalancer",
+    "ParameterValue": "arn:aws:elasticloadbalancing:us-east-1:171754680472:loadbalancer/app/forest-app-api/495a5899b76e5e75"
   }
 ]
