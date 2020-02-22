@@ -75,6 +75,7 @@ Resources:
               sudo chmod +x /usr/local/bin/docker-compose
               sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
               cd forest-app-api
+              git checkout feature/ec2-deployment
               sudo docker-compose build
               sudo docker-compose up &
   InstanceSecurityGroup:
