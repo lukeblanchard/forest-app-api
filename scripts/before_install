@@ -1,3 +1,4 @@
 #!/bin/bash 
 
+cd /forest-app-api
 sudo docker-compose down -v
