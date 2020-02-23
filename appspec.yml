@@ -1,14 +1,14 @@
 version: 0.0
 os: linux
-files: 
-    - source: /
-      destination: /home/ec2-user
+files:
+  - source: /
+    destination: /home/ec2-user/forest-app-api
 hooks:
-    BeforeInstall:
-        - location: scripts/before_install
-          timeout: 200
-          runas: root
-    AfterInstall: 
-        - location: scripts/after_install
-          timeout: 200
-          runas: root
+  BeforeInstall:
+    - location: scripts/before_install
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/after_install
+      timeout: 300
+      runas: root
