@@ -1,4 +1,5 @@
 #!/bin/bash
 
+cd /forest-app-api
 sudo docker-compose build 
 sudo docker-compose up &
