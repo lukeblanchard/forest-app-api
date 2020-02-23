@@ -5,10 +5,10 @@ files:
       destination: /forest-app-api
 hooks:
     BeforeInstall:
-        - location: /forest-app-api/scripts/before_install
+        - location: scripts/before_install
           timeout: 200
           runas: root
     AfterInstall: 
-        - location: /forest-app-api/scripts/after_intsall
+        - location: scripts/after_intsall
           timeout: 200
           runas: root
