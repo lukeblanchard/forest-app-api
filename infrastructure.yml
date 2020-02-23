@@ -50,13 +50,13 @@ Resources:
       LaunchConfigurationName: !Ref LaunchConfig
       MinSize: '2'
       MaxSize: '2'
-      IamInstanceProfile: 
       TargetGroupARNs:
         - !Ref TargetGroup
   LaunchConfig:
     Type: 'AWS::AutoScaling::LaunchConfiguration'
     Properties:
       KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref IAMInstanceProfile 
       ImageId: !FindInMap
         - AWSRegionArch2AMI
         - !Ref 'AWS::Region'
@@ -78,9 +78,8 @@ Resources:
               sudo yum install wget
               cd /home/ec2-user
               wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
-              chmod +x ./install
+              sudo chmod +x ./install
               sudo ./install auto
-              cd /
               sudo amazon-linux-extras install docker
               sudo service docker start 
               sudo yum install git -y
