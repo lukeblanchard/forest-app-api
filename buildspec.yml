@@ -1,14 +1,3 @@
 version: 0.2
 
-run-as: ec2-user 
 
-phases: 
-    pre_build: 
-        commands:
-            - sudo docker-compose down -v 
-    build:
-        commands:
-            - sudo docker-compose build
-    post_build:
-        commands:
-            - sudo docker-compose up & 
