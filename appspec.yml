@@ -2,6 +2,7 @@ version: 0.0
 os: linux
 files: 
     - source: /
+    - destination: /forest-app-api
 hooks:
     BeforeInstall:
         - location: scripts/before_install
