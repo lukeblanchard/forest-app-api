@@ -1,3 +1,6 @@
 version: 0.2
 
-
+artifacts: 
+    files: 
+        - '**/*'
+    name: forest-app-&(date +%Y-%m-%d)
