@@ -6,15 +6,15 @@ phases:
     pre_build: 
         run-as: ec2-user
         commands:
-            - echo Stopping and removing containers...
+            - echo "Stopping and removing containers..."
             - sudo docker-compose down -v 
     build:
         run-as: ec2-user
         commands:
-            - echo Building new images...
+            - echo "Building new images..."
             - sudo docker-compose build
     post_build:
         run-as: ec2-user
         commands:
-            - echo Starting app...
+            - echo "Starting app..."
             - sudo docker-compose up & 
