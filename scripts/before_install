@@ -3,5 +3,4 @@
 cd /home/ec2-user/forest-app-api
 sudo docker-compose down -v
 cd /home/ec2-user
-cd /opt/codedeploy-agent/deployment-root/
-rm -rf
+sudo rm -rf forest-app-api/*
