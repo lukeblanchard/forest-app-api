@@ -4,11 +4,17 @@ run-as: ec2-user
 
 phases: 
     pre_build: 
-        - echo Stopping and removing containers...
-        - sudo docker-compose down -v 
+        run-as: ec2-user
+        commands:
+            - echo Stopping and removing containers...
+            - sudo docker-compose down -v 
     build:
-        - echo Building new images...
-        - sudo docker-compose build
+        run-as: ec2-user
+        commands:
+            - echo Building new images...
+            - sudo docker-compose build
     post_build:
-        - echo Starting app...
-        - sudo docker-compose up & 
+        run-as: ec2-user
+        commands:
+            - echo Starting app...
+            - sudo docker-compose up & 
