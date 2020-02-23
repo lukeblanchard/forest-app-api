@@ -31,6 +31,10 @@ Parameters:
     Description: ARN of existing SSL cert
     Type: String
     ConstraintDescription: must be the name of an existing SSL associated with ALB.
+  IAMInstanceProfile:
+    Description: Role to access S3
+    Type: String
+    ConstraintDescription: must be arn for existing role with access to S3
 Mappings:
   AWSInstanceType2Arch:
     t2.micro:
@@ -46,6 +50,7 @@ Resources:
       LaunchConfigurationName: !Ref LaunchConfig
       MinSize: '2'
       MaxSize: '2'
+      IamInstanceProfile: 
       TargetGroupARNs:
         - !Ref TargetGroup
   LaunchConfig:

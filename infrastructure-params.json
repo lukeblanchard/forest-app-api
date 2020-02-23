@@ -18,5 +18,9 @@
   {
     "ParameterKey": "ElasticLoadBalancer",
     "ParameterValue": "arn:aws:elasticloadbalancing:us-east-1:171754680472:loadbalancer/app/forest-app-api/495a5899b76e5e75"
+  },
+  {
+    "ParameterKey": "IAMInstanceProfile",
+    "ParameterValue": "arn:aws:iam::171754680472:instance-profile/Ec2-deploy-s3-access"
   }
 ]

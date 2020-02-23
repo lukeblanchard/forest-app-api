@@ -131,3 +131,4 @@ dmypy.json
 .vscode
 .pylintrc
 env
+.infrastructure-params.json
