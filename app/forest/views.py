@@ -23,6 +23,19 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
         return self.serializer_class
 
+    def create(self, request, *args, **kwargs):
+        try:
+            instance = Project.objects.create(
+                name=request.data['name'],
+                land_owner=request.data['land_owner'],
+                measurement_system=request.data['measurement_system']
+            )
+        except Exception as e:
+            print('exception ', e)
+        instance.save()
+        project = serializers.ProjectSerializer(instance).data
+        return Response(project)
+
 
 class ProjectStandsViewSet(viewsets.ModelViewSet):
     """Manage stands associated with a given project"""
