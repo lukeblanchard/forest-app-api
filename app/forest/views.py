@@ -98,6 +98,17 @@ class PlotTreesViewSet(viewsets.ModelViewSet):
         plot_id = self.kwargs['plot_id']
         return self.queryset.filter(plot=plot_id)
 
+    def list(self, request, *args, **kwargs):
+        trees_all = Tree.objects.all()
+        plot_id = self.kwargs['plot_id']
+        trees = serializers.TreeSerializer(
+            trees_all.filter(plot=plot_id), many=True).data
+        for tree in trees:
+            sym = tree['symbol']
+            ref = TreeReference.objects.get(pk=sym)
+            tree['symbol'] = serializers.TreeReferenceSerializer(ref).data
+        return Response(trees)
+
 
 class ProjectSampleDesignsViewSet(viewsets.ModelViewSet):
     """Manage plots associated with a given stand"""
