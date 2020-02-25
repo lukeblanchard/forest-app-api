@@ -41,7 +41,7 @@ class StandSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Stand
-        fields = ('id', 'project_id', 'identification', 'location',
+        fields = ('id', 'project_id', 'location',
                   'origin_year', 'size', 'plots')
         read_only_fields = ('id', 'plots')
 

@@ -1,7 +1,7 @@
 [
-    {"model": "core.Stand", "pk": 3, "fields": {"project_id": 4, "identification": 3, "location": "Burnt Bridge", "origin_year": 2010, "size": 22.0}},
-    {"model": "core.Stand", "pk": 2, "fields": {"project_id": 2, "identification": 2, "location": "St Joe", "origin_year": 1981, "size": 35.0}},
-    {"model": "core.Stand", "pk": 1, "fields": {"project_id": 1, "identification": 1, "location": "Antler HIll", "origin_year": 1888, "size": 51.0}}
+    {"model": "core.Stand", "pk": 3, "fields": {"project_id": 4, "location": "Burnt Bridge", "origin_year": 2010, "size": 22.0}},
+    {"model": "core.Stand", "pk": 2, "fields": {"project_id": 2, "location": "St Joe", "origin_year": 1981, "size": 35.0}},
+    {"model": "core.Stand", "pk": 1, "fields": {"project_id": 1, "location": "Antler HIll", "origin_year": 1888, "size": 51.0}}
 ]
 
 

@@ -84,13 +84,12 @@ class SampleDesign(models.Model):
 class Stand(models.Model):
     project_id = models.ForeignKey('Project', on_delete=models.CASCADE,
                                    related_name='stands')
-    identification = models.IntegerField(unique=True)
     location = models.CharField(max_length=255)
     origin_year = models.IntegerField()
     size = models.FloatField()
 
     def __str__(self):
-        return self.location + '::' + str(self.identification)
+        return self.location + '::' + str(self.project_id)
 
 
 class Plot(models.Model):
