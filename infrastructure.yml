@@ -48,15 +48,15 @@ Resources:
     Properties:
       VPCZoneIdentifier: !Ref Subnets
       LaunchConfigurationName: !Ref LaunchConfig
-      MinSize: '2'
-      MaxSize: '2'
+      MinSize: '1'
+      MaxSize: '1'
       TargetGroupARNs:
         - !Ref TargetGroup
   LaunchConfig:
     Type: 'AWS::AutoScaling::LaunchConfiguration'
     Properties:
       KeyName: !Ref KeyName
-      IamInstanceProfile: !Ref IAMInstanceProfile 
+      IamInstanceProfile: !Ref IAMInstanceProfile
       ImageId: !FindInMap
         - AWSRegionArch2AMI
         - !Ref 'AWS::Region'
