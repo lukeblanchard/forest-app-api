@@ -16,7 +16,7 @@
       "name": "Grey Towers",
       "land_owner": "Gifford Pinchot",
       "date": "2020-02-10T01:48:36.935592Z",
-      "measurement_system": "ENG"
+      "measurement_system": "english"
     }
   },
   {
@@ -26,7 +26,7 @@
       "name": "Biltmore",
       "land_owner": "George Vanderbilt",
       "date": "2020-02-10T01:48:36.935592Z",
-      "measurement_system": "ENG"
+      "measurement_system": "english"
     }
   },
   {
@@ -36,7 +36,7 @@
       "name": "Apalachicola Northern Rail",
       "land_owner": "Edward Ball",
       "date": "2020-02-10T01:48:36.935592Z",
-      "measurement_system": "ENG"
+      "measurement_system": "english"
     }
   }
 ]
