@@ -5,9 +5,6 @@ from django.contrib.auth import get_user_model
 from core.models import Project, Stand, Plot, Tree, TreeReference
 
 
-def stand_identification(c=count()): return next(c)
-
-
 def plot_number(c=count()): return next(c)
 
 
@@ -32,7 +29,6 @@ def sample_stand(project, **params):
     """Create and return a sample stand"""
     defaults = {
         'project_id': project,
-        'identification': stand_identification(),
         'location': 'Test County',
         'origin_year': 1933,
         'size': 20
@@ -63,8 +59,6 @@ def sample_tree_reference(**params):
         'symbol': 'test symbol',
         'scientific_name': 'test scientific name',
         'common_name': 'test common name',
-        'family': 'test family',
-        'max_density_index': 200
     }
     defaults.update(params)
 
@@ -115,7 +109,7 @@ class ModelTests(TestCase):
         """Test stand string representation"""
         project = sample_project()
         stand = sample_stand(project)
-        str_rep = stand.location + '::' + str(stand.identification)
+        str_rep = stand.location + '::' + str(stand.project_id)
         self.assertEqual(str(stand), str_rep)
 
     def test_plot_str(self):
@@ -139,8 +133,6 @@ class ModelTests(TestCase):
             symbol='t symbol',
             scientific_name='test sn',
             common_name='test cn',
-            family='test fam',
-            max_density_index=295
         )
         str_rep = (tree_reference.scientific_name + "::" +
                    tree_reference.common_name)

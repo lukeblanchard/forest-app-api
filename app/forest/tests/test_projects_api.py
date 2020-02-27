@@ -24,9 +24,6 @@ TREE_REFERENCE_URL = reverse('forest:treereference-list')
 TREE_URL = reverse('forest:tree-list')
 
 
-def stand_identification(c=count()): return next(c)
-
-
 def plot_number(c=count()): return next(c)
 
 
@@ -66,7 +63,6 @@ def sample_stand(project_id, **params):
     """Create and return a sample stand"""
     defaults = {
         'project_id': project_id,
-        'identification': stand_identification(),
         'location': 'Test County',
         'origin_year': 1933,
         'size': 20
@@ -97,8 +93,6 @@ def sample_tree_reference(**params):
         'symbol': 'test symbol',
         'scientific_name': 'test scientific name',
         'common_name': 'test common name',
-        'family': 'test family',
-        'max_density_index': 200
     }
     defaults.update(params)
 
@@ -143,14 +137,6 @@ class PublicProjectsApiTest(TestCase):
         ).exists()
         self.assertTrue(exists)
 
-    def test_create_project_invalid(self):
-        """Test creating a project with invalid payload"""
-        payload = {'name': '',
-                   'land_owner': 'Test Owner C',
-                   'measurement_system': 'metric'}
-        res = self.client.post(PROJECTS_URL, payload)
-        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
-
     def test_view_project_detail(self):
         """Test viewing single project detail"""
         project = sample_project()
@@ -186,7 +172,6 @@ class PublicStandsApiTest(TestCase):
         project = sample_project()
         payload = {
             'project_id': project.id,
-            'identification': 3,
             'location': 'Test County',
             'origin_year': 1933,
             'size': 20
@@ -255,8 +240,6 @@ class PublicTreeReferenceApiTest(TestCase):
             'symbol': 't symbol',
             'scientific_name': 'test sn',
             'common_name': 'test cn',
-            'family': 'test fam',
-            'max_density_index': 295
         }
 
         res = self.client.post(TREE_REFERENCE_URL, payload)
