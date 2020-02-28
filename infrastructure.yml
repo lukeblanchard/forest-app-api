@@ -15,9 +15,9 @@ Parameters:
   InstanceType:
     Description: WebServer EC2 instance type
     Type: String
-    Default: t2.micro
+    Default: t2.medium
     AllowedValues:
-      - t2.micro
+      - t2.medium
     ConstraintDescription: must be a valid EC2 instance type
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instances
@@ -37,7 +37,7 @@ Parameters:
     ConstraintDescription: must be arn for existing role with access to S3
 Mappings:
   AWSInstanceType2Arch:
-    t2.micro:
+    t2.medium:
       Arch: HVM64
   AWSRegionArch2AMI:
     us-east-1:
