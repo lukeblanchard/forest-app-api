@@ -25,7 +25,7 @@ SECRET_KEY = '$rg2hmj8qo&!!za8eas)=beo9^9@**7_z+)1dm7+p1!va2i(*0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [os.environ.get('DJANGO_ALLOWED_HOSTS')]
+ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -87,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': 'database-1.cfaevwniko3z.us-east-1.rds.amazonaws.com',
-        'NAME': 'database-1',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'password', 
-        'PORT': 5432,
+        'PORT': '5432',
     }
 }
 
