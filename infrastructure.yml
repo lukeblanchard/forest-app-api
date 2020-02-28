@@ -15,9 +15,9 @@ Parameters:
   InstanceType:
     Description: WebServer EC2 instance type
     Type: String
-    Default: t2.medium
+    Default: t2.micro
     AllowedValues:
-      - t2.medium
+      - t2.micro
     ConstraintDescription: must be a valid EC2 instance type
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instances
@@ -34,10 +34,14 @@ Parameters:
   IAMInstanceProfile:
     Description: Role to access S3
     Type: String
-    ConstraintDescription: must be arn for existing role with access to S3
+    ConstraintDescription: must be arn for existing role with access to S3 
+  SecurityGroup: 
+    Description: Instance Security Group
+    Type: String
+    ConstraintDescription: must be arn for existing role with access to S3 
 Mappings:
   AWSInstanceType2Arch:
-    t2.medium:
+    t2.micro:
       Arch: HVM64
   AWSRegionArch2AMI:
     us-east-1:
@@ -51,7 +55,7 @@ Resources:
       MinSize: '2'
       MaxSize: '2'
       TargetGroupARNs:
-        - !Ref TargetGroup
+        - !Ref TargetGroup 
   LaunchConfig:
     Type: 'AWS::AutoScaling::LaunchConfiguration'
     Properties:
@@ -65,7 +69,7 @@ Resources:
           - !Ref InstanceType
           - Arch
       SecurityGroups:
-        - !Ref InstanceSecurityGroup
+        - !Ref SecurityGroup
       InstanceType: !Ref InstanceType
       UserData: !Base64
         'Fn::Join':
@@ -91,20 +95,6 @@ Resources:
               git checkout feature/ec2-deployment
               sudo docker-compose build
               sudo docker-compose up &
-  InstanceSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
-    Properties:
-      GroupDescription: Enable SSH access and HTTP access on the configured port
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: '22'
-          ToPort: '22'
-          CidrIp: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: '80'
-          ToPort: '80'
-          CidrIp: 0.0.0.0/0
-      VpcId: !Ref VpcId
   LoadBalancerListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:

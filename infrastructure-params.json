@@ -22,5 +22,9 @@
   {
     "ParameterKey": "IAMInstanceProfile",
     "ParameterValue": "arn:aws:iam::171754680472:instance-profile/Ec2-deploy-s3-access"
+  },
+  {
+    "ParameterKey": "SecurityGroup",
+    "ParameterValue": "sg-0a4d96979faaa5eb0"
   }
 ]

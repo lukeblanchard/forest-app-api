@@ -1,0 +1,40 @@
+version: '3'
+services:
+  test_app:
+    build: 
+        context: .
+    command: >
+      sh -c "python manage.py migrate --database=test &&
+             python manage.py loaddata ./fixtures/* --database=test &&
+             gunicorn app.wsgi:application --bind 0.0.0.0:8000"
+    expose:
+      - 8000
+    volumes: 
+      - ./app:/app
+    environment:
+      - DEBUG=0
+      - SECRET_KEY=supersecretkey
+      - DJANGO_ALLOWED_HOSTS=*
+      - DB_HOST=db
+      - DB_NAME=app
+      - DB_USER=postgres
+      - DB_PASS=supersecretpassword
+      - DB_PORT=5432
+      - DATABASE=postgres
+    depends_on:
+      - db
+
+  nginx:
+    build: 
+        context: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - test_app
+
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=supersecretpassword

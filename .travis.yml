@@ -4,3 +4,8 @@ python:
 
 services: 
     - docker 
+
+before_script: pip install docker-compose 
+
+script: 
+    - docker-compose -f docker-compose-test.yml run --rm test_app sh -c "python manage.py test && flake8"
