@@ -1,7 +1,7 @@
 # forest-app-api
 
 ## Getting Started 
-The instructions below will get the project up and running on your local machine 
+The instructions below roject up and running on your local machine 
 
 ### Prerequisites
 You need both Docker and Docker Compose 
